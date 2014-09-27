@@ -8,9 +8,13 @@
 
 #import "RootViewController.h"
 #import "HAAppListingTableViewDatasource.h"
+#import "HANetworkingRequestManager.h"
+
+static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topgrossingapplications/sf=143441/limit=25/json";
 
 @interface RootViewController ()
 
+@property (strong, nonatomic) HANetworkingRequestManager *requestManager;
 @property (strong, nonatomic) UITableView *appListingTableView;
 @property (strong, nonatomic) HAAppListingTableViewDatasource *tableViewDatasource;
 
@@ -24,6 +28,8 @@
     if ( self ) {
         // localize for good will in this case
         self.title = NSLocalizedString(@"Hackerati App", @"title");
+        
+        _requestManager = [[HANetworkingRequestManager alloc] init];
     }
     return self;
 }
@@ -37,7 +43,9 @@
     appListingTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // TODO: separate this init out and initialize in networking
-    self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:@[]];
+    NSArray *entries = [self.requestManager downloadAppEntriesDataFromStringURL:kHARSSDataURL];
+    
+    self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:entries];
     self.tableViewDatasource.listingDatasourceTableView = appListingTableView;
     appListingTableView.dataSource = self.tableViewDatasource;
     

@@ -109,11 +109,11 @@
 			<array>
 				<string>01D9EB3C19D6FDCA00003DBE</string>
 				<string>01D9EB3D19D6FDCA00003DBE</string>
+				<string>01D9EB3F19D7435900003DBE</string>
+				<string>01D9EB4019D7435900003DBE</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Networking</string>
 			<key>path</key>
 			<string>Networking</string>
 			<key>sourceTree</key>
@@ -128,7 +128,7 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>HANetworkingManager.h</string>
+			<string>HANetworkingReachabilityManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -141,7 +141,7 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>HANetworkingManager.m</string>
+			<string>HANetworkingReachabilityManager.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -149,6 +149,72 @@
 		<dict>
 			<key>fileRef</key>
 			<string>01D9EB3D19D6FDCA00003DBE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>01D9EB3F19D7435900003DBE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>HANetworkingRequestManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>01D9EB4019D7435900003DBE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>HANetworkingRequestManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>01D9EB4119D7435900003DBE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>01D9EB4019D7435900003DBE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>01D9EB4219D766BA00003DBE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>HADownloadProgressViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>01D9EB4319D766BA00003DBE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>HADownloadProgressViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>01D9EB4419D766BA00003DBE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>01D9EB4319D766BA00003DBE</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -244,8 +310,10 @@
 			<array>
 				<string>0114525519D6328900876614</string>
 				<string>01DEEA5219D23C0F008C4FB4</string>
+				<string>01D9EB4419D766BA00003DBE</string>
 				<string>01D9EB3A19D6EBFD00003DBE</string>
 				<string>01DEEA5519D23C0F008C4FB4</string>
+				<string>01D9EB4119D7435900003DBE</string>
 				<string>01DEEA5819D23C0F008C4FB4</string>
 				<string>01D9EB3E19D6FDCA00003DBE</string>
 				<string>01DEEA4F19D23C0F008C4FB4</string>
@@ -957,6 +1025,8 @@
 			<array>
 				<string>01DEEA5619D23C0F008C4FB4</string>
 				<string>01DEEA5719D23C0F008C4FB4</string>
+				<string>01D9EB4219D766BA00003DBE</string>
+				<string>01D9EB4319D766BA00003DBE</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
