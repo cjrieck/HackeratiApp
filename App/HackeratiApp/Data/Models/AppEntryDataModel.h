@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface AppEntryDataModel : NSObject
 
 @property (strong, nonatomic, readonly) NSString *title;

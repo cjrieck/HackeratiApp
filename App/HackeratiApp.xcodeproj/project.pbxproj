@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0114525519D6328900876614 /* AppEntryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0114525419D6328900876614 /* AppEntryDataModel.m */; };
+		01D9EB3A19D6EBFD00003DBE /* HAAppListingTableViewDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB3919D6EBFD00003DBE /* HAAppListingTableViewDatasource.m */; };
 		01DEEA4F19D23C0F008C4FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA4E19D23C0F008C4FB4 /* main.m */; };
 		01DEEA5219D23C0F008C4FB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5119D23C0F008C4FB4 /* AppDelegate.m */; };
 		01DEEA5519D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5319D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		0114525319D6328900876614 /* AppEntryDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppEntryDataModel.h; sourceTree = "<group>"; };
 		0114525419D6328900876614 /* AppEntryDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppEntryDataModel.m; sourceTree = "<group>"; };
+		01D9EB3819D6EBFD00003DBE /* HAAppListingTableViewDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAAppListingTableViewDatasource.h; sourceTree = "<group>"; };
+		01D9EB3919D6EBFD00003DBE /* HAAppListingTableViewDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAAppListingTableViewDatasource.m; sourceTree = "<group>"; };
 		01DEEA4919D23C0F008C4FB4 /* HackeratiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackeratiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01DEEA4D19D23C0F008C4FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01DEEA4E19D23C0F008C4FB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 			children = (
 				0114525619D6329000876614 /* Models */,
 				0114851B19D3A165003D21CB /* Core Data */,
+				01D9EB3819D6EBFD00003DBE /* HAAppListingTableViewDatasource.h */,
+				01D9EB3919D6EBFD00003DBE /* HAAppListingTableViewDatasource.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			files = (
 				0114525519D6328900876614 /* AppEntryDataModel.m in Sources */,
 				01DEEA5219D23C0F008C4FB4 /* AppDelegate.m in Sources */,
+				01D9EB3A19D6EBFD00003DBE /* HAAppListingTableViewDatasource.m in Sources */,
 				01DEEA5519D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld in Sources */,
 				01DEEA5819D23C0F008C4FB4 /* RootViewController.m in Sources */,
 				01DEEA4F19D23C0F008C4FB4 /* main.m in Sources */,
