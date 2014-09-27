@@ -23,7 +23,12 @@ static NSString * const kHAAppEntryCellIdentifier = @"cell";
 {
     self = [super init];
     if ( self ) {
-        // TODO: Iterate over entries and create models from each and append to appEntries
+        _appEntries = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *entry in entries) {
+            AppEntryDataModel *entryModel = [[AppEntryDataModel alloc] initWithEntry:entry];
+            [_appEntries addObject:entryModel];
+        }
     }
     return self;
 }
@@ -43,16 +48,15 @@ static NSString * const kHAAppEntryCellIdentifier = @"cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
-    //return self.appEntries.count;
+    return self.appEntries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.listingDatasourceTableView dequeueReusableCellWithIdentifier:kHAAppEntryCellIdentifier];
     if ( cell ) {
-        // Set cell title equal to title in model
-        cell.textLabel.text = @"test";
+        AppEntryDataModel *selectedEntry = [self.appEntries objectAtIndex:indexPath.row];
+        cell.textLabel.text = selectedEntry.title;
     }
     return cell;
 }
