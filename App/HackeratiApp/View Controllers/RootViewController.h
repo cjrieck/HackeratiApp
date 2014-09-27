@@ -6,10 +6,7 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
+@interface RootViewController : UIViewController
 
 
 @end
-
