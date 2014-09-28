@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HAAppEntry.h"
 
 @interface HAEntryDetailViewController : UIViewController
+
+- (instancetype)initWIthEntry:(HAAppEntry *)entry;
 
 @end

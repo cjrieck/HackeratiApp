@@ -10,6 +10,7 @@
 #import "HAAppListingTableViewDatasource.h"
 #import "HANetworkingRequestManager.h"
 #import "HADownloadProgressViewController.h"
+#import "HAEntryDetailViewController.h"
 
 static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topgrossingapplications/sf=143441/limit=25/json";
 
@@ -18,7 +19,6 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 @property (strong, nonatomic) HANetworkingRequestManager *requestManager;
 @property (strong, nonatomic) UITableView *appListingTableView;
 @property (strong, nonatomic) HAAppListingTableViewDatasource *tableViewDatasource;
-@property (strong, nonatomic) NSArray *entries;
 
 @end
 
@@ -43,10 +43,6 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
     
     UITableView *appListingTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     appListingTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    // TODO: separate this init out and initialize in networking
-//    NSArray *entries = [self.requestManager downloadAppEntriesDataFromStringURL:kHARSSDataURL];
-    
     appListingTableView.delegate = self;
     [self.view addSubview:appListingTableView];
     _appListingTableView = appListingTableView;
@@ -63,10 +59,13 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 
 #pragma mark - UITableView delegate methods
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Get app entry details at indexPath.row
-    return indexPath;
+    HAAppEntry *selectedEntry = [self.tableViewDatasource.appEntries objectAtIndex:indexPath.row];
+    HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
+    [self.appListingTableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark - Download progress view controller delegate
@@ -74,8 +73,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 - (void)downloadProgressDidCompleteWithData:(id)data
 {
     if ( [data isKindOfClass:[NSArray class]] ) {
-        self.entries = (NSArray *)data;
-        self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:self.entries];
+        self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:(NSArray *)data];
         self.tableViewDatasource.listingDatasourceTableView = self.appListingTableView;
         self.appListingTableView.dataSource = self.tableViewDatasource;
         [self.appListingTableView reloadData];

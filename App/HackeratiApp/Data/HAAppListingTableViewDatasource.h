@@ -9,6 +9,7 @@
 @interface HAAppListingTableViewDatasource : NSObject <UITableViewDataSource>
 
 @property (weak, nonatomic) UITableView *listingDatasourceTableView;
+@property (strong, nonatomic, readonly) NSMutableArray *appEntries;
 
 - (instancetype)initWithEntries:(NSArray *)entries;
 

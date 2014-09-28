@@ -7,13 +7,13 @@
 //
 
 #import "HAAppListingTableViewDatasource.h"
-#import "AppEntryDataModel.h"
+#import "HAAppEntry.h"
 
 static NSString * const kHAAppEntryCellIdentifier = @"cell";
 
 @interface HAAppListingTableViewDatasource ()
 
-@property (strong, nonatomic) NSMutableArray *appEntries;
+@property (strong, nonatomic, readwrite) NSMutableArray *appEntries;
 
 @end
 
@@ -26,7 +26,7 @@ static NSString * const kHAAppEntryCellIdentifier = @"cell";
         _appEntries = [[NSMutableArray alloc] init];
         
         for (NSDictionary *entry in entries) {
-            AppEntryDataModel *entryModel = [[AppEntryDataModel alloc] initWithEntry:entry];
+            HAAppEntry *entryModel = [[HAAppEntry alloc] initWithEntry:entry];
             [_appEntries addObject:entryModel];
         }
     }
@@ -55,7 +55,7 @@ static NSString * const kHAAppEntryCellIdentifier = @"cell";
 {
     UITableViewCell *cell = [self.listingDatasourceTableView dequeueReusableCellWithIdentifier:kHAAppEntryCellIdentifier];
     if ( cell ) {
-        AppEntryDataModel *selectedEntry = [self.appEntries objectAtIndex:indexPath.row];
+        HAAppEntry *selectedEntry = [self.appEntries objectAtIndex:indexPath.row];
         cell.textLabel.text = selectedEntry.title;
     }
     return cell;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import "AppEntryDataModel.h"
+#import "HAAppEntry.h"
 
 static NSString * const kHAAppNameKey         = @"im:name";
 static NSString * const kHAAppSummaryKey      = @"summary";
@@ -22,7 +22,7 @@ static NSString * const kHAEntryAttributesKey = @"attributes";
 static NSString * const kHAEntryLabelKey      = @"label";
 static NSString * const kHAEntryHRefKey       = @"href";
 
-@interface AppEntryDataModel ()
+@interface HAAppEntry ()
 
 @property (strong, nonatomic, readwrite) NSString *title;
 @property (strong, nonatomic, readwrite) NSString *summary;
@@ -36,7 +36,7 @@ static NSString * const kHAEntryHRefKey       = @"href";
 
 @end
 
-@implementation AppEntryDataModel
+@implementation HAAppEntry
 
 - (instancetype)initWithEntry:(NSDictionary *)appEntry
 {
