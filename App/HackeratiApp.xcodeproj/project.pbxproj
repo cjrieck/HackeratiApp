@@ -16,7 +16,7 @@
 		01DEEA4F19D23C0F008C4FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA4E19D23C0F008C4FB4 /* main.m */; };
 		01DEEA5219D23C0F008C4FB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5119D23C0F008C4FB4 /* AppDelegate.m */; };
 		01DEEA5519D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5319D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld */; };
-		01DEEA5819D23C0F008C4FB4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5719D23C0F008C4FB4 /* RootViewController.m */; };
+		01DEEA5819D23C0F008C4FB4 /* HARootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA5719D23C0F008C4FB4 /* HARootViewController.m */; };
 		01DEEA5D19D23C0F008C4FB4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01DEEA5C19D23C0F008C4FB4 /* Images.xcassets */; };
 		01DEEA6C19D23C0F008C4FB4 /* HackeratiAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEEA6B19D23C0F008C4FB4 /* HackeratiAppTests.m */; };
 		0881669F8F4542769412C6E3 /* libPods-HackeratiApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD02F30FDE8429E8FB8059F /* libPods-HackeratiApp.a */; };
@@ -51,8 +51,8 @@
 		01DEEA5019D23C0F008C4FB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01DEEA5119D23C0F008C4FB4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		01DEEA5419D23C0F008C4FB4 /* HackeratiApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackeratiApp.xcdatamodel; sourceTree = "<group>"; };
-		01DEEA5619D23C0F008C4FB4 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		01DEEA5719D23C0F008C4FB4 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		01DEEA5619D23C0F008C4FB4 /* HARootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HARootViewController.h; sourceTree = "<group>"; };
+		01DEEA5719D23C0F008C4FB4 /* HARootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HARootViewController.m; sourceTree = "<group>"; };
 		01DEEA5C19D23C0F008C4FB4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01DEEA6519D23C0F008C4FB4 /* HackeratiAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackeratiAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01DEEA6A19D23C0F008C4FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -181,8 +181,8 @@
 		01DEEA7619D23CF2008C4FB4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				01DEEA5619D23C0F008C4FB4 /* RootViewController.h */,
-				01DEEA5719D23C0F008C4FB4 /* RootViewController.m */,
+				01DEEA5619D23C0F008C4FB4 /* HARootViewController.h */,
+				01DEEA5719D23C0F008C4FB4 /* HARootViewController.m */,
 				01D9EB4219D766BA00003DBE /* HADownloadProgressViewController.h */,
 				01D9EB4319D766BA00003DBE /* HADownloadProgressViewController.m */,
 				01D9EB4519D7ADF800003DBE /* HAEntryDetailViewController.h */,
@@ -358,7 +358,7 @@
 				01DEEA5519D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld in Sources */,
 				01D9EB4719D7ADF800003DBE /* HAEntryDetailViewController.m in Sources */,
 				01D9EB4119D7435900003DBE /* HANetworkingRequestManager.m in Sources */,
-				01DEEA5819D23C0F008C4FB4 /* RootViewController.m in Sources */,
+				01DEEA5819D23C0F008C4FB4 /* HARootViewController.m in Sources */,
 				01D9EB3E19D6FDCA00003DBE /* HANetworkingReachabilityManager.m in Sources */,
 				01DEEA4F19D23C0F008C4FB4 /* main.m in Sources */,
 			);

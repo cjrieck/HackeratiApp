@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-@interface RootViewController : UIViewController <UITableViewDelegate>
+@interface HARootViewController : UIViewController <UITableViewDelegate>
 
 
 @end

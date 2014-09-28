@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "HARootViewController.h"
 #import "HAAppListingTableViewDatasource.h"
 #import "HANetworkingRequestManager.h"
 #import "HADownloadProgressViewController.h"
@@ -14,7 +14,7 @@
 
 static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topgrossingapplications/sf=143441/limit=25/json";
 
-@interface RootViewController () <HADownloadProgressViewControllerDelegate>
+@interface HARootViewController () <HADownloadProgressViewControllerDelegate>
 
 @property (strong, nonatomic) HANetworkingRequestManager *requestManager;
 @property (strong, nonatomic) UITableView *appListingTableView;
@@ -22,14 +22,14 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 
 @end
 
-@implementation RootViewController
+@implementation HARootViewController
 
 - (instancetype)init
 {
     self = [super init];
     if ( self ) {
         // localize for good will in this case
-        self.title = NSLocalizedString(@"Hackerati App", @"title");
+        self.title = @"Hackerati App";
         
         _requestManager = [[HANetworkingRequestManager alloc] init];
     }
@@ -57,11 +57,16 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
     [self presentViewController:downloadVC animated:YES completion:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:YES animated:NO];
+}
+
 #pragma mark - UITableView delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Get app entry details at indexPath.row
     HAAppEntry *selectedEntry = [self.tableViewDatasource.appEntries objectAtIndex:indexPath.row];
     HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
     [self.appListingTableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -7,6 +7,7 @@
 //
 
 #import "HAEntryDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface HAEntryDetailViewController ()
 
@@ -30,12 +31,13 @@
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.autoresizesSubviews = YES;
     
-    self.navigationController.toolbarHidden = NO;
+    [self.navigationController setToolbarHidden:NO animated:YES];
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
-                                                                                                    style:UIBarButtonItemStylePlain
-                                                                                                   target:self
-                                                                                                   action:@selector(favorite)];
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(favorite)];
     
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                  target:self
