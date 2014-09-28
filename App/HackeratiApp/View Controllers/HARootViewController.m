@@ -28,8 +28,8 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 {
     self = [super init];
     if ( self ) {
-        // localize for good will in this case
-        self.title = @"Hackerati App";
+        UIImageView *titlePic = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"The Hackerati"]];
+        self.navigationItem.titleView = titlePic;
         
         _requestManager = [[HANetworkingRequestManager alloc] init];
     }
@@ -41,10 +41,14 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
     self.view.backgroundColor = [UIColor redColor];
     self.view.autoresizesSubviews = YES;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorites"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(showFavorites)];
+    
     UITableView *appListingTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     appListingTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     appListingTableView.delegate = self;
-    [self.view addSubview:appListingTableView];
     _appListingTableView = appListingTableView;
 }
 
@@ -54,13 +58,22 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
     NSURL *rssURL = [NSURL URLWithString:kHARSSDataURL];
     HADownloadProgressViewController *downloadVC = [[HADownloadProgressViewController alloc] initWithURL:rssURL];
     downloadVC.delegate = self;
-    [self presentViewController:downloadVC animated:YES completion:nil];
+    
+    // !!!: Surpress transition warning from UINavigationController. Should be ok since everything UI-based is still on the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:downloadVC animated:NO completion:nil];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES animated:NO];
+}
+
+- (void)showFavorites
+{
+    // TODO: implement favorites VC
 }
 
 #pragma mark - UITableView delegate methods
@@ -82,6 +95,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
         self.tableViewDatasource.listingDatasourceTableView = self.appListingTableView;
         self.appListingTableView.dataSource = self.tableViewDatasource;
         [self.appListingTableView reloadData];
+        [self.view addSubview:self.appListingTableView];
     }
 }
 
