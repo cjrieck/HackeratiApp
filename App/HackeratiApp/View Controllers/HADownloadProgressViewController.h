@@ -6,8 +6,16 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@protocol HADownloadProgressViewControllerDelegate <NSObject>
+
+- (void)downloadProgressDidCompleteWithData:(id)data;
+
+@end
 
 @interface HADownloadProgressViewController : UIViewController
+
+@property (weak, nonatomic) id<HADownloadProgressViewControllerDelegate>delegate;
+
+- (instancetype)initWithURL:(NSURL *)url;
 
 @end

@@ -6,10 +6,16 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@protocol HANetworkingRequestManagerDelegate <NSObject>
+
+- (void)requestDidFinishDownloadingWithData:(id)data;
+
+@end
 
 @interface HANetworkingRequestManager : NSObject
 
-- (NSArray *)downloadAppEntriesDataFromStringURL:(NSString *)urlString;
+@property (weak, nonatomic) id<HANetworkingRequestManagerDelegate>delegate;
+
+- (void)downloadAppEntriesDataFromStringURL:(NSURL *)url;
 
 @end

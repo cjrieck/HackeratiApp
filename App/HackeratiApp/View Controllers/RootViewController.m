@@ -9,14 +9,16 @@
 #import "RootViewController.h"
 #import "HAAppListingTableViewDatasource.h"
 #import "HANetworkingRequestManager.h"
+#import "HADownloadProgressViewController.h"
 
 static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topgrossingapplications/sf=143441/limit=25/json";
 
-@interface RootViewController ()
+@interface RootViewController () <HADownloadProgressViewControllerDelegate>
 
 @property (strong, nonatomic) HANetworkingRequestManager *requestManager;
 @property (strong, nonatomic) UITableView *appListingTableView;
 @property (strong, nonatomic) HAAppListingTableViewDatasource *tableViewDatasource;
+@property (strong, nonatomic) NSArray *entries;
 
 @end
 
@@ -43,11 +45,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
     appListingTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // TODO: separate this init out and initialize in networking
-    NSArray *entries = [self.requestManager downloadAppEntriesDataFromStringURL:kHARSSDataURL];
-    
-    self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:entries];
-    self.tableViewDatasource.listingDatasourceTableView = appListingTableView;
-    appListingTableView.dataSource = self.tableViewDatasource;
+//    NSArray *entries = [self.requestManager downloadAppEntriesDataFromStringURL:kHARSSDataURL];
     
     appListingTableView.delegate = self;
     [self.view addSubview:appListingTableView];
@@ -56,6 +54,11 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSURL *rssURL = [NSURL URLWithString:kHARSSDataURL];
+    HADownloadProgressViewController *downloadVC = [[HADownloadProgressViewController alloc] initWithURL:rssURL];
+    downloadVC.delegate = self;
+    [self presentViewController:downloadVC animated:YES completion:nil];
 }
 
 #pragma mark - UITableView delegate methods
@@ -64,6 +67,19 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 {
     // TODO: Get app entry details at indexPath.row
     return indexPath;
+}
+
+#pragma mark - Download progress view controller delegate
+
+- (void)downloadProgressDidCompleteWithData:(id)data
+{
+    if ( [data isKindOfClass:[NSArray class]] ) {
+        self.entries = (NSArray *)data;
+        self.tableViewDatasource = [[HAAppListingTableViewDatasource alloc] initWithEntries:self.entries];
+        self.tableViewDatasource.listingDatasourceTableView = self.appListingTableView;
+        self.appListingTableView.dataSource = self.tableViewDatasource;
+        [self.appListingTableView reloadData];
+    }
 }
 
 @end

@@ -51,7 +51,7 @@ static NSString * const kHAEntryHRefKey       = @"href";
         _category = [self labelFromEntryData:[[appEntry objectForKey:kHAAppCategoryKey] objectForKey:kHAEntryAttributesKey]];
         _releaseDate = [self labelFromEntryData:[[appEntry objectForKey:kHAAppReleaseDateKey] objectForKey:kHAEntryAttributesKey]];
         
-        NSString *stringURL = [self labelFromEntryData:[[[appEntry objectForKey:kHAAppStoreLinkKey] objectForKey:kHAEntryAttributesKey] objectForKey:kHAEntryHRefKey]];
+        NSString *stringURL = [[[appEntry objectForKey:kHAAppStoreLinkKey] objectForKey:kHAEntryAttributesKey] objectForKey:kHAEntryHRefKey];
         _storeLink = [NSURL URLWithString:stringURL];
     }
     return self;

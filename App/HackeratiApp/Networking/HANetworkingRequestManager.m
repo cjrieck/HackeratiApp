@@ -31,31 +31,30 @@ static NSString * const kHAAppEntriesKey = @"entry";
     return self;
 }
 
-- (NSArray *)downloadAppEntriesDataFromStringURL:(NSString *)urlString
+- (void)downloadAppEntriesDataFromStringURL:(NSURL *)url
 {
-    NSParameterAssert(urlString);
+    NSParameterAssert(url);
     
     __block NSArray *entries;
     NSOperationQueue *queue = self.sessionManager.operationQueue;
     
-    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSError *error;
         NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
         entries = [[responseJSON objectForKey:kHAAppFeedKey] objectForKey:kHAAppEntriesKey];
-        NSLog(@"%@", entries);
+        [self.delegate requestDidFinishDownloadingWithData:entries];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+        
         [[[UIAlertView alloc] initWithTitle:@"There was an error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        [self.delegate requestDidFinishDownloadingWithData:nil];
     }];
 
     [queue addOperation:operation];
-    
-    return entries;
 }
 
 @end
