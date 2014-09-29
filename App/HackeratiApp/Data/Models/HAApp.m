@@ -67,9 +67,18 @@ static NSString * const kHACoreDataStoreLinkKey = @"storeLink";
     return self;
 }
 
+#pragma mark - Private
+
 - (NSString *)labelFromEntryData:(NSDictionary *)metaData
 {
     return [metaData objectForKey:kHAEntryLabelKey];
+}
+
+#pragma mark - Public
+
+- (NSArray *)enumeratedProperties
+{
+    return @[self.company, self.price, self.contentType, self.category, self.releaseDate, self.summary, self.storeLink, self.copyright];
 }
 
 @end

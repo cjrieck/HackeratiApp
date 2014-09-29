@@ -19,6 +19,6 @@
 @property (strong, nonatomic, readonly) NSString *storeLink;
 
 - (instancetype)initWithEntry:(NSDictionary *)appEntry;
-- (BOOL)saveToContext:(NSManagedObjectContext *)context;
+- (NSArray *)enumeratedProperties;
 
 @end

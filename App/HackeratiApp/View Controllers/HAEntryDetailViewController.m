@@ -10,11 +10,15 @@
 #import "HACoreDataManager.h"
 #import "HAApp.h"
 
-@interface HAEntryDetailViewController ()
+static NSString * const kHADetailsCellReuseIdentifier = @"cell";
+
+@interface HAEntryDetailViewController () <UITableViewDataSource>
 
 @property (strong, nonatomic) HAApp *entry;
 @property (strong, nonatomic) UIBarButtonItem *favoriteButton;
 @property (strong, nonatomic) UIBarButtonItem *unfavoriteButton;
+@property (strong, nonatomic) UITableView *detailsTableView;
+
 @end
 
 @implementation HAEntryDetailViewController
@@ -34,6 +38,13 @@
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.autoresizesSubviews = YES;
+    
+    UITableView *detailsTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    [detailsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kHADetailsCellReuseIdentifier];
+    detailsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    detailsTableView.dataSource = self;
+    [self.view addSubview:detailsTableView];
+    _detailsTableView = detailsTableView;
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     
@@ -72,13 +83,20 @@
     
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)layoutSubviews
+{
+    [self.view layoutSubviews];
+    
+    CGRect tableViewFrame = self.detailsTableView.frame;
+    tableViewFrame.size.height = self.detailsTableView.contentSize.height;
+    self.detailsTableView.frame = tableViewFrame;
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)share
 {
-    // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device
+    // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device. Only shares App Store URL for now
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.entry.storeLink] applicationActivities:nil];
     // Following spec for only copy, email and Twitter sharing capabilities. Remove this line to enable all possible sharing options
     activityViewController.excludedActivityTypes = @[UIActivityTypeMessage, UIActivityTypePostToFacebook];
@@ -97,6 +115,30 @@
 {
     [[HACoreDataManager sharedManager] deleteEntry:self.entry];
     self.navigationItem.rightBarButtonItem = self.favoriteButton;
+}
+
+#pragma mark - UITableView datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.entry.enumeratedProperties.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.detailsTableView dequeueReusableCellWithIdentifier:kHADetailsCellReuseIdentifier];
+    if ( cell ) {
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.text = [self.entry.enumeratedProperties objectAtIndex:indexPath.row];
+    }
+    
+    return cell;
 }
 
 @end
