@@ -77,6 +77,7 @@ static NSString * const kHACellReuseIdentifier = @"cell";
     if ( cell ) {
         HAAppEntry *entry = [self.coreDataEntitiesArray objectAtIndex:indexPath.row];
         cell.textLabel.text = entry.title;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
@@ -87,6 +88,8 @@ static NSString * const kHACellReuseIdentifier = @"cell";
 {
     HAAppEntry *selectedEntry = [self.coreDataEntitiesArray objectAtIndex:indexPath.row];
     HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
+    detailViewController.showFavorite = NO;
+    [self.favoritesTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

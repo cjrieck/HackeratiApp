@@ -76,7 +76,8 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 {
     // TODO: implement favorites VC
     HAFavoritesViewController *favoritesViewController = [[HAFavoritesViewController alloc] init];
-    [self.navigationController presentViewController:favoritesViewController animated:YES completion:nil];
+    UINavigationController *favoritesNavigationController = [[UINavigationController alloc] initWithRootViewController:favoritesViewController];
+    [self.navigationController presentViewController:favoritesNavigationController animated:YES completion:nil];
 }
 
 #pragma mark - UITableView delegate methods
@@ -85,6 +86,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 {
     HAAppEntry *selectedEntry = [self.tableViewDatasource.appEntries objectAtIndex:indexPath.row];
     HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
+    detailViewController.showFavorite = YES;
     [self.appListingTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }

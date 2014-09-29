@@ -10,6 +10,8 @@
 
 @interface HAEntryDetailViewController : UIViewController
 
+@property (assign, nonatomic) BOOL showFavorite;
+
 - (instancetype)initWIthEntry:(HAAppEntry *)entry;
 
 @end

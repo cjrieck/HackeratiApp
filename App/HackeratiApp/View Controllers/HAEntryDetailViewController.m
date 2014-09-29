@@ -37,11 +37,13 @@ static NSString * const kHACoreDataEntityName = @"HAAppEntry";
     self.view.autoresizesSubviews = YES;
     
     [self.navigationController setToolbarHidden:NO animated:YES];
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
-                                                                               style:UIBarButtonItemStylePlain
-                                                                              target:self
-                                                                              action:@selector(favorite)];
     
+    if ( self.showFavorite ) {
+         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
+                                                                                   style:UIBarButtonItemStylePlain
+                                                                                  target:self
+                                                                                  action:@selector(favorite)];
+    }
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                  target:self
                                                                                  action:@selector(share)];
