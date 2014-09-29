@@ -7,17 +7,20 @@
 //
 
 #import "HAEntryDetailViewController.h"
-#import "AppDelegate.h"
+#import "HACoreDataManager.h"
+#import "HAApp.h"
+
+static NSString * const kHACoreDataEntityName = @"HAAppEntry";
 
 @interface HAEntryDetailViewController ()
 
-@property (strong, nonatomic) HAAppEntry *entry;
+@property (strong, nonatomic) HAApp *entry;
 
 @end
 
 @implementation HAEntryDetailViewController
 
-- (instancetype)initWIthEntry:(HAAppEntry *)entry
+- (instancetype)initWIthEntry:(HAApp *)entry
 {
     self = [super init];
     if ( self ) {
@@ -58,7 +61,7 @@
 - (void)share
 {
     // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device
-    NSURL *shareURL = self.entry.storeLink;
+    NSURL *shareURL = [NSURL URLWithString:self.entry.storeLink];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[shareURL] applicationActivities:nil];
     // Following spec for only copy, email and Twitter sharing capabilities. Remove this line to enable all possible sharing options
     activityViewController.excludedActivityTypes = @[UIActivityTypeMessage, UIActivityTypePostToFacebook];
@@ -69,7 +72,22 @@
 
 - (void)favorite
 {
-    // TODO: Save to core data
+    HAAppEntry *entryModel = [NSEntityDescription insertNewObjectForEntityForName:kHACoreDataEntityName inManagedObjectContext:[[HACoreDataManager sharedManager] managedObjectContext]];
+    
+    entryModel.title = self.entry.title;
+    entryModel.summary = self.entry.summary;
+    entryModel.price = self.entry.price;
+    entryModel.contentType = self.entry.contentType;
+    entryModel.copyright = self.entry.copyright;
+    entryModel.company = self.entry.company;
+    entryModel.category = self.entry.category;
+    entryModel.releaseDate = self.entry.releaseDate;
+    entryModel.storeLink = self.entry.storeLink;
+    
+    NSError *error;
+    if ( ![[[HACoreDataManager sharedManager] managedObjectContext] save:&error] ) {
+        NSLog(@"%@", error.localizedDescription);
+    }
 }
 
 @end

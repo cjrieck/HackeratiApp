@@ -11,6 +11,7 @@
 #import "HANetworkingRequestManager.h"
 #import "HADownloadProgressViewController.h"
 #import "HAEntryDetailViewController.h"
+#import "HAFavoritesViewController.h"
 
 static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topgrossingapplications/sf=143441/limit=25/json";
 
@@ -74,6 +75,8 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 - (void)showFavorites
 {
     // TODO: implement favorites VC
+    HAFavoritesViewController *favoritesViewController = [[HAFavoritesViewController alloc] init];
+    [self.navigationController presentViewController:favoritesViewController animated:YES completion:nil];
 }
 
 #pragma mark - UITableView delegate methods
