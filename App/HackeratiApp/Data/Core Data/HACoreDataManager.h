@@ -8,6 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
+@class HAApp;
+
 @interface HACoreDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -18,6 +20,9 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void)saveEntry:(HAApp *)appEntry;
+- (void)deleteEntry:(HAApp *)appEntry;
 - (NSArray *)fetchAllEntities;
+- (BOOL)entryExists:(HAApp *)appEntry;
 
 @end

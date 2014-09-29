@@ -10,12 +10,11 @@
 #import "HACoreDataManager.h"
 #import "HAApp.h"
 
-static NSString * const kHACoreDataEntityName = @"HAAppEntry";
-
 @interface HAEntryDetailViewController ()
 
 @property (strong, nonatomic) HAApp *entry;
-
+@property (strong, nonatomic) UIBarButtonItem *favoriteButton;
+@property (strong, nonatomic) UIBarButtonItem *unfavoriteButton;
 @end
 
 @implementation HAEntryDetailViewController
@@ -38,12 +37,29 @@ static NSString * const kHACoreDataEntityName = @"HAAppEntry";
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     
+    
+    UIBarButtonItem *favoriteButton = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
+                                                           style:UIBarButtonItemStylePlain
+                                                          target:self
+                                                          action:@selector(favorite)];
+    _favoriteButton = favoriteButton;
+    
+    UIBarButtonItem *unfavoriteButton = [[UIBarButtonItem alloc] initWithTitle:@"Un-Favorite"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(unfavorite)];
+    _unfavoriteButton = unfavoriteButton;
+    
     if ( self.showFavorite ) {
-         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
-                                                                                   style:UIBarButtonItemStylePlain
-                                                                                  target:self
-                                                                                  action:@selector(favorite)];
+        
+        if ( [[HACoreDataManager sharedManager] entryExists:self.entry] ) {
+            self.navigationItem.rightBarButtonItem = unfavoriteButton;
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = favoriteButton;
+        }
     }
+    
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                  target:self
                                                                                  action:@selector(share)];
@@ -63,8 +79,7 @@ static NSString * const kHACoreDataEntityName = @"HAAppEntry";
 - (void)share
 {
     // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device
-    NSURL *shareURL = [NSURL URLWithString:self.entry.storeLink];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[shareURL] applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.entry.storeLink] applicationActivities:nil];
     // Following spec for only copy, email and Twitter sharing capabilities. Remove this line to enable all possible sharing options
     activityViewController.excludedActivityTypes = @[UIActivityTypeMessage, UIActivityTypePostToFacebook];
     activityViewController.popoverPresentationController.sourceView = self.view;
@@ -74,22 +89,14 @@ static NSString * const kHACoreDataEntityName = @"HAAppEntry";
 
 - (void)favorite
 {
-    HAAppEntry *entryModel = [NSEntityDescription insertNewObjectForEntityForName:kHACoreDataEntityName inManagedObjectContext:[[HACoreDataManager sharedManager] managedObjectContext]];
-    
-    entryModel.title = self.entry.title;
-    entryModel.summary = self.entry.summary;
-    entryModel.price = self.entry.price;
-    entryModel.contentType = self.entry.contentType;
-    entryModel.copyright = self.entry.copyright;
-    entryModel.company = self.entry.company;
-    entryModel.category = self.entry.category;
-    entryModel.releaseDate = self.entry.releaseDate;
-    entryModel.storeLink = self.entry.storeLink;
-    
-    NSError *error;
-    if ( ![[[HACoreDataManager sharedManager] managedObjectContext] save:&error] ) {
-        NSLog(@"%@", error.localizedDescription);
-    }
+    [[HACoreDataManager sharedManager] saveEntry:self.entry];
+    self.navigationItem.rightBarButtonItem = self.unfavoriteButton;
+}
+
+- (void)unfavorite
+{
+    [[HACoreDataManager sharedManager] deleteEntry:self.entry];
+    self.navigationItem.rightBarButtonItem = self.favoriteButton;
 }
 
 @end

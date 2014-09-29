@@ -7,6 +7,10 @@
 //
 
 #import "HACoreDataManager.h"
+#import "HAAppEntry.h"
+#import "HAApp.h"
+
+static NSString * const kHACoreDataEntityName = @"HAAppEntry";
 
 @implementation HACoreDataManager
 
@@ -100,15 +104,78 @@
     }
 }
 
+- (void)saveEntry:(HAApp *)appEntry
+{
+    HAAppEntry *entryModel = [NSEntityDescription insertNewObjectForEntityForName:kHACoreDataEntityName inManagedObjectContext:self.managedObjectContext];
+    
+    entryModel.title = appEntry.title;
+    entryModel.summary = appEntry.summary;
+    entryModel.price = appEntry.price;
+    entryModel.contentType = appEntry.contentType;
+    entryModel.copyright = appEntry.copyright;
+    entryModel.company = appEntry.company;
+    entryModel.category = appEntry.category;
+    entryModel.releaseDate = appEntry.releaseDate;
+    entryModel.storeLink = appEntry.storeLink;
+    
+    NSError *error;
+    if ( ![self.managedObjectContext save:&error] ) {
+        NSLog(@"%@", error.localizedDescription);
+    }
+}
+
+- (void)deleteEntry:(HAApp *)appEntry
+{
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:kHACoreDataEntityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    // !!!: Assuming app title is a unique identifier/no other app in the App Store will have the same name
+    NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"title == %@", appEntry.title];
+    [fetchRequest setPredicate:filterPredicate];
+    
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if ( results.count == 1 ) {
+        // !!!: Assume there's only 1 entry in the array because title is unique
+        [self.managedObjectContext deleteObject:results[0]];
+    }
+    
+    if ( ![self.managedObjectContext save:&error] ) {
+        NSLog(@"%@", error.localizedDescription);
+    }
+}
+
 - (NSArray *)fetchAllEntities
 {
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"HAAppEntry" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:kHACoreDataEntityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entityDescription];
     
     NSArray *entities = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     return entities;
+}
+
+- (BOOL)entryExists:(HAApp *)appEntry
+{
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kHACoreDataEntityName];
+    
+    // !!!: Assuming app title is a unique identifier/no other app in the App Store will have the same name
+    NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"title == %@", appEntry.title];
+    [fetchRequest setPredicate:filterPredicate];
+    [fetchRequest setFetchLimit:1];
+    
+    NSUInteger entityCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+    if ( entityCount == NSNotFound ) {
+        NSLog(@"%@", error.localizedDescription);
+    }
+    else if ( entityCount == 1 ) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end
