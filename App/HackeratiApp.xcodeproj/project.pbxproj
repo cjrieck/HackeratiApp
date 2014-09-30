@@ -133,6 +133,8 @@
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
@@ -243,8 +245,6 @@ mogenerator -m "HackeratiApp/Data/Core Data/HackeratiApp.xcdatamodeld" --machine
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>HAAppEntry.h</string>
 			<key>path</key>
 			<string>HAAppEntry.h</string>
 			<key>sourceTree</key>
@@ -258,8 +258,6 @@ mogenerator -m "HackeratiApp/Data/Core Data/HackeratiApp.xcdatamodeld" --machine
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>HAAppEntry.m</string>
 			<key>path</key>
 			<string>HAAppEntry.m</string>
 			<key>sourceTree</key>
@@ -344,10 +342,24 @@ mogenerator -m "HackeratiApp/Data/Core Data/HackeratiApp.xcdatamodeld" --machine
 			<array/>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Views</string>
 			<key>path</key>
 			<string>Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0178E48A19DADF1700282A21</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>01D9EB3819D6EBFD00003DBE</string>
+				<string>01D9EB3919D6EBFD00003DBE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Datasources</string>
+			<key>path</key>
+			<string>Datasources</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1350,10 +1362,9 @@ mogenerator -m "HackeratiApp/Data/Core Data/HackeratiApp.xcdatamodeld" --machine
 		<dict>
 			<key>children</key>
 			<array>
+				<string>0178E48A19DADF1700282A21</string>
 				<string>0114525619D6329000876614</string>
 				<string>0114851B19D3A165003D21CB</string>
-				<string>01D9EB3819D6EBFD00003DBE</string>
-				<string>01D9EB3919D6EBFD00003DBE</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
