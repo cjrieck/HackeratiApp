@@ -39,7 +39,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 
 - (void)loadView {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.view.autoresizesSubviews = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Favorites"
@@ -101,6 +101,11 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
         [self.appListingTableView reloadData];
         [self.view addSubview:self.appListingTableView];
     }
+}
+
+- (void)downloadDidFail
+{
+    [self showFavorites];
 }
 
 @end

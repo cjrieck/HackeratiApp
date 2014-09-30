@@ -77,39 +77,54 @@
     [connectionOperation start];
 }
 
+- (void)animateViewsWithStringResult:(NSString *)resultString downloaded:(BOOL)downloaded
+{
+    [UIView animateWithDuration:1.0f
+                     animations:^{
+                         self.progressView.alpha = 0.0f;
+                     }
+                     completion:nil];
+    
+    UILabel *thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    thankYouLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    thankYouLabel.center = self.view.center;
+    thankYouLabel.text = NSLocalizedString(resultString, @"completion message");
+    thankYouLabel.font = [UIFont systemFontOfSize:25.0f];
+    thankYouLabel.textAlignment = NSTextAlignmentCenter;
+    thankYouLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    thankYouLabel.numberOfLines = 0;
+    thankYouLabel.alpha = 0.0f;
+    [self.view addSubview:thankYouLabel];
+    
+    [UIView animateWithDuration:0.5f
+                          delay:0.5f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         thankYouLabel.alpha = 1.0f;
+                     }
+                     completion:^(BOOL finished){
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                             [self dismissViewControllerAnimated:YES completion:^{
+                                 if ( !downloaded ) {
+                                     // !!!: Must run this synchronously because the download view is modal like the favorites view
+                                     [self.delegate downloadDidFail];
+                                 }
+                             }];
+                         });
+                     }];
+
+}
+
 #pragma mark - HANetworking delegate
 
 - (void)requestDidFinishDownloadingWithData:(id)data
 {
     if ( data ) {
-        [self.delegate downloadProgressDidCompleteWithData:data];
-        
-        [UIView animateWithDuration:1.0f
-                         animations:^{
-                             self.progressView.alpha = 0.0f;
-                         }
-                         completion:nil];
-        
-        UILabel *thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-        thankYouLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-        thankYouLabel.center = self.view.center;
-        thankYouLabel.text = NSLocalizedString(@"Download Complete!", @"completion message");
-        thankYouLabel.font = [UIFont systemFontOfSize:25.0];
-        thankYouLabel.textAlignment = NSTextAlignmentCenter;
-        thankYouLabel.alpha = 0.0f;
-        [self.view addSubview:thankYouLabel];
-        
-        [UIView animateWithDuration:0.5f
-                              delay:0.5f
-                            options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-                             thankYouLabel.alpha = 1.0f;
-                         }
-                         completion:^(BOOL finished){
-                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                 [self dismissViewControllerAnimated:YES completion:nil];
-                             });
-                         }];
+        [self.delegate downloadProgressDidCompleteWithData:data]; // populate rootview table while modal displayed
+        [self animateViewsWithStringResult:@"Download Complete!" downloaded:YES];
+    }
+    else {
+        [self animateViewsWithStringResult:@"Error :( but we'll show you your favorites!" downloaded:NO];
     }
 }
 

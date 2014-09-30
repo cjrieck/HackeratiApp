@@ -9,6 +9,7 @@
 @protocol HADownloadProgressViewControllerDelegate <NSObject>
 
 - (void)downloadProgressDidCompleteWithData:(id)data;
+- (void)downloadDidFail;
 
 @end
 
