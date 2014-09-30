@@ -74,7 +74,6 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 
 - (void)showFavorites
 {
-    // TODO: implement favorites VC
     HAFavoritesViewController *favoritesViewController = [[HAFavoritesViewController alloc] init];
     UINavigationController *favoritesNavigationController = [[UINavigationController alloc] initWithRootViewController:favoritesViewController];
     [self.navigationController presentViewController:favoritesNavigationController animated:YES completion:nil];

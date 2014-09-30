@@ -1,5 +1,5 @@
 //
-//  AppDataModel.m
+//  HAApp.m
 //  HackeratiApp
 //
 //  Created by Clayton Rieck on 9/26/14.
