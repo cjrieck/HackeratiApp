@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 HA. All rights reserved.
 //
 
+/**
+ *  Un-cached, local model for storing app information.
+ */
 @interface HAApp : NSObject
 
 @property (strong, nonatomic, readonly) NSString *title;

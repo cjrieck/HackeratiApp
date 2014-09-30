@@ -7,7 +7,6 @@
 //
 
 #import "HANetworkingRequestManager.h"
-#import "HANetworkingReachabilityManager.h"
 #import <AFNetworking/AFNetworking.h>
 
 static NSString * const kHAAppFeedKey = @"feed";

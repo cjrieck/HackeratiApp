@@ -26,10 +26,7 @@
 		0178E47B19D8DFA100282A21 /* HAAppEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178E47A19D8DFA100282A21 /* HAAppEntry.m */; };
 		0178E47E19D8DFAB00282A21 /* _HAAppEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178E47D19D8DFAB00282A21 /* _HAAppEntry.m */; };
 		0178E48119D8E30900282A21 /* HAApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178E48019D8E30900282A21 /* HAApp.m */; };
-		0178E48419DA403A00282A21 /* HADetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178E48319DA403A00282A21 /* HADetailTableViewCell.m */; };
-		0178E48919DA45FD00282A21 /* HADetailCellLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178E48819DA45FD00282A21 /* HADetailCellLabel.m */; };
 		01D9EB3A19D6EBFD00003DBE /* HAAppListingTableViewDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB3919D6EBFD00003DBE /* HAAppListingTableViewDatasource.m */; };
-		01D9EB3E19D6FDCA00003DBE /* HANetworkingReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB3D19D6FDCA00003DBE /* HANetworkingReachabilityManager.m */; };
 		01D9EB4119D7435900003DBE /* HANetworkingRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB4019D7435900003DBE /* HANetworkingRequestManager.m */; };
 		01D9EB4419D766BA00003DBE /* HADownloadProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB4319D766BA00003DBE /* HADownloadProgressViewController.m */; };
 		01D9EB4719D7ADF800003DBE /* HAEntryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9EB4619D7ADF800003DBE /* HAEntryDetailViewController.m */; };
@@ -70,14 +67,8 @@
 		0178E47D19D8DFAB00282A21 /* _HAAppEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _HAAppEntry.m; sourceTree = "<group>"; };
 		0178E47F19D8E30900282A21 /* HAApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAApp.h; sourceTree = "<group>"; };
 		0178E48019D8E30900282A21 /* HAApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAApp.m; sourceTree = "<group>"; };
-		0178E48219DA403A00282A21 /* HADetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HADetailTableViewCell.h; sourceTree = "<group>"; };
-		0178E48319DA403A00282A21 /* HADetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HADetailTableViewCell.m; sourceTree = "<group>"; };
-		0178E48719DA45FD00282A21 /* HADetailCellLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HADetailCellLabel.h; sourceTree = "<group>"; };
-		0178E48819DA45FD00282A21 /* HADetailCellLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HADetailCellLabel.m; sourceTree = "<group>"; };
 		01D9EB3819D6EBFD00003DBE /* HAAppListingTableViewDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAAppListingTableViewDatasource.h; sourceTree = "<group>"; };
 		01D9EB3919D6EBFD00003DBE /* HAAppListingTableViewDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAAppListingTableViewDatasource.m; sourceTree = "<group>"; };
-		01D9EB3C19D6FDCA00003DBE /* HANetworkingReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HANetworkingReachabilityManager.h; sourceTree = "<group>"; };
-		01D9EB3D19D6FDCA00003DBE /* HANetworkingReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HANetworkingReachabilityManager.m; sourceTree = "<group>"; };
 		01D9EB3F19D7435900003DBE /* HANetworkingRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HANetworkingRequestManager.h; sourceTree = "<group>"; };
 		01D9EB4019D7435900003DBE /* HANetworkingRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HANetworkingRequestManager.m; sourceTree = "<group>"; };
 		01D9EB4219D766BA00003DBE /* HADownloadProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HADownloadProgressViewController.h; sourceTree = "<group>"; };
@@ -162,10 +153,6 @@
 		0178E48519DA404400282A21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0178E48219DA403A00282A21 /* HADetailTableViewCell.h */,
-				0178E48319DA403A00282A21 /* HADetailTableViewCell.m */,
-				0178E48719DA45FD00282A21 /* HADetailCellLabel.h */,
-				0178E48819DA45FD00282A21 /* HADetailCellLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -173,8 +160,6 @@
 		01D9EB3B19D6FC8E00003DBE /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				01D9EB3C19D6FDCA00003DBE /* HANetworkingReachabilityManager.h */,
-				01D9EB3D19D6FDCA00003DBE /* HANetworkingReachabilityManager.m */,
 				01D9EB3F19D7435900003DBE /* HANetworkingRequestManager.h */,
 				01D9EB4019D7435900003DBE /* HANetworkingRequestManager.m */,
 			);
@@ -446,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0178E48419DA403A00282A21 /* HADetailTableViewCell.m in Sources */,
 				0178E47E19D8DFAB00282A21 /* _HAAppEntry.m in Sources */,
 				01DEEA5219D23C0F008C4FB4 /* AppDelegate.m in Sources */,
 				0178E46019D897DC00282A21 /* HAFavoritesViewController.m in Sources */,
@@ -456,11 +440,9 @@
 				01DEEA5519D23C0F008C4FB4 /* HackeratiApp.xcdatamodeld in Sources */,
 				01D9EB4719D7ADF800003DBE /* HAEntryDetailViewController.m in Sources */,
 				01D9EB4119D7435900003DBE /* HANetworkingRequestManager.m in Sources */,
-				0178E48919DA45FD00282A21 /* HADetailCellLabel.m in Sources */,
 				0178E46919D8B8F100282A21 /* HACoreDataManager.m in Sources */,
 				0178E48119D8E30900282A21 /* HAApp.m in Sources */,
 				01DEEA5819D23C0F008C4FB4 /* HARootViewController.m in Sources */,
-				01D9EB3E19D6FDCA00003DBE /* HANetworkingReachabilityManager.m in Sources */,
 				01DEEA4F19D23C0F008C4FB4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

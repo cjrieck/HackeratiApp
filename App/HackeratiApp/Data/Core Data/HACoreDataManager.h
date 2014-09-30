@@ -10,6 +10,9 @@
 
 @class HAApp;
 
+/**
+ *  Singleton manager for core data operations save and delete.
+ */
 @interface HACoreDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
