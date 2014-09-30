@@ -35,8 +35,10 @@
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.autoresizesSubviews = YES;
     
     UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    progressView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     progressView.center = self.view.center;
     progressView.backgroundColor = [UIColor colorWithWhite:0.765 alpha:1.000];
     progressView.tintColor = [UIColor colorWithRed:0.071 green:0.421 blue:0.944 alpha:1.000];
@@ -89,6 +91,7 @@
                          completion:nil];
         
         UILabel *thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+        thankYouLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         thankYouLabel.center = self.view.center;
         thankYouLabel.text = NSLocalizedString(@"Download Complete!", @"completion message");
         thankYouLabel.font = [UIFont systemFontOfSize:25.0];
@@ -103,7 +106,7 @@
                              thankYouLabel.alpha = 1.0f;
                          }
                          completion:^(BOOL finished){
-                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                  [self dismissViewControllerAnimated:YES completion:nil];
                              });
                          }];

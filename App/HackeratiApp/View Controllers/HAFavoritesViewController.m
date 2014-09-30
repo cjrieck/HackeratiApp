@@ -47,7 +47,9 @@ static NSString * const kHACellReuseIdentifier = @"cell";
     [self.view addSubview:favoritesTableView];
     _favoritesTableView = favoritesTableView;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissController)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(dismissController)];
 }
 
 - (void)viewDidLoad {

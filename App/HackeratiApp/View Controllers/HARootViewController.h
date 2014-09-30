@@ -8,5 +8,4 @@
 
 @interface HARootViewController : UIViewController <UITableViewDelegate>
 
-
 @end

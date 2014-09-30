@@ -41,6 +41,7 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
     
     UITableView *detailsTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     [detailsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kHADetailsCellReuseIdentifier];
+    detailsTableView.tableFooterView.frame = CGRectZero;
     detailsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     detailsTableView.dataSource = self;
     [self.view addSubview:detailsTableView];
@@ -148,8 +149,10 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 {
     UITableViewCell *cell = [self.detailsTableView dequeueReusableCellWithIdentifier:kHADetailsCellReuseIdentifier];
     if ( cell ) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
+        [cell sizeToFit];
         cell.textLabel.text = [self.entry.enumeratedProperties objectAtIndex:indexPath.row];
     }
     

@@ -330,6 +330,7 @@
 					};
 					01DEEA4819D23C0F008C4FB4 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 6B9EL644Z8;
 					};
 					01DEEA6419D23C0F008C4FB4 = {
 						CreatedOnToolsVersion = 6.0.1;
