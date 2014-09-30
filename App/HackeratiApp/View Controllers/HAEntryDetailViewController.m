@@ -12,7 +12,7 @@
 
 static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 
-@interface HAEntryDetailViewController () <UITableViewDataSource>
+@interface HAEntryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) HAApp *entry;
 @property (strong, nonatomic) UIBarButtonItem *favoriteButton;
@@ -140,6 +140,13 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 - (void)orientationChanged
 {
     [self.detailsTableView reloadData];
+}
+
+#pragma mark - UITabelView delegate
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
 }
 
 #pragma mark - UITableView datasource
