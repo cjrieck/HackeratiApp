@@ -12,7 +12,7 @@
 
 static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 
-@interface HAEntryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HAEntryDetailViewController () <UITableViewDataSource>
 
 @property (strong, nonatomic) HAApp *entry;
 @property (strong, nonatomic) UIBarButtonItem *favoriteButton;
@@ -107,13 +107,22 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 
 - (void)share
 {
-    // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device. Only shares App Store URL for now
+    // !!!: Sharing options (e.g. Twitter), aside from Apple actions and custom actions, will only show up on a device. Only shares App Store URL for now
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.entry.storeLink] applicationActivities:nil];
     // Following spec for only copy, email and Twitter sharing capabilities. Remove this line to enable all possible sharing options
     activityViewController.excludedActivityTypes = @[UIActivityTypeMessage, UIActivityTypePostToFacebook];
-    activityViewController.popoverPresentationController.sourceView = self.view;
-    activityViewController.popoverPresentationController.sourceRect = self.view.bounds;
-    [self.navigationController presentViewController:activityViewController animated:YES completion:nil];
+    activityViewController.popoverPresentationController.barButtonItem = [self.toolbarItems firstObject];
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+        UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popover presentPopoverFromRect:self.view.frame
+                                 inView:self.view
+               permittedArrowDirections:UIPopoverArrowDirectionAny
+                               animated:YES];
+    }
+    else {
+        [self.navigationController presentViewController:activityViewController animated:YES completion:nil];
+    }
 }
 
 - (void)favorite
