@@ -12,7 +12,7 @@
 
 static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 
-@interface HAEntryDetailViewController () <UITableViewDataSource>
+@interface HAEntryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) HAApp *entry;
 @property (strong, nonatomic) UIBarButtonItem *favoriteButton;
@@ -149,11 +149,10 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 {
     UITableViewCell *cell = [self.detailsTableView dequeueReusableCellWithIdentifier:kHADetailsCellReuseIdentifier];
     if ( cell ) {
+        cell.textLabel.text = [self.entry.enumeratedProperties objectAtIndex:indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
-        [cell sizeToFit];
-        cell.textLabel.text = [self.entry.enumeratedProperties objectAtIndex:indexPath.row];
     }
     
     return cell;

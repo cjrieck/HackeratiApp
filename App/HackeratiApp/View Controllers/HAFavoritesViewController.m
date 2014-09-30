@@ -52,12 +52,10 @@ static NSString * const kHACellReuseIdentifier = @"cell";
                                                                                            action:@selector(dismissController)];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (void)dismissController
 {
+    // Prevent crash when dismissing modal and user still editing cell
+    [self.favoritesTableView setEditing:NO];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -85,6 +83,27 @@ static NSString * const kHACellReuseIdentifier = @"cell";
 }
 
 #pragma mark - UITableView delegate
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( editingStyle == UITableViewCellEditingStyleDelete ) {
+        HAApp *entryToDelete = [self.coreDataEntitiesArray objectAtIndex:indexPath.row];
+        [[HACoreDataManager sharedManager] deleteEntry:entryToDelete];
+        
+        [self.favoritesTableView beginUpdates];
+        NSMutableArray *mutableEntities = [self.coreDataEntitiesArray mutableCopy];
+        [mutableEntities removeObjectAtIndex:indexPath.row];
+        self.coreDataEntitiesArray = [NSArray arrayWithArray:mutableEntities];
+        
+        [self.favoritesTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.favoritesTableView endUpdates];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
