@@ -87,7 +87,7 @@ static NSString * const kHACellReuseIdentifier = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HAAppEntry *selectedEntry = [self.coreDataEntitiesArray objectAtIndex:indexPath.row];
-    HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
+    HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWithEntry:selectedEntry];
     detailViewController.showFavorite = NO;
     [self.favoritesTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:detailViewController animated:YES];

@@ -12,6 +12,6 @@
 
 @property (assign, nonatomic) BOOL showFavorite;
 
-- (instancetype)initWIthEntry:(HAAppEntry *)entry;
+- (instancetype)initWithEntry:(HAAppEntry *)entry;
 
 @end

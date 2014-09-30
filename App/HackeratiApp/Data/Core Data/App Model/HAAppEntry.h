@@ -3,4 +3,6 @@
 
 @interface HAAppEntry : _HAAppEntry {}
 
+- (NSArray *)enumeratedProperties;
+
 @end

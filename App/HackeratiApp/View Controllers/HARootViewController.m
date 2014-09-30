@@ -85,7 +85,7 @@ static NSString * const kHARSSDataURL = @"http://ax.itunes.apple.com/WebObjects/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HAAppEntry *selectedEntry = [self.tableViewDatasource.appEntries objectAtIndex:indexPath.row];
-    HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWIthEntry:selectedEntry];
+    HAEntryDetailViewController *detailViewController = [[HAEntryDetailViewController alloc] initWithEntry:selectedEntry];
     detailViewController.showFavorite = YES;
     [self.appListingTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:detailViewController animated:YES];

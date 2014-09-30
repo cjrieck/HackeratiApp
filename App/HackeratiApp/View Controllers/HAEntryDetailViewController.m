@@ -23,7 +23,7 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 
 @implementation HAEntryDetailViewController
 
-- (instancetype)initWIthEntry:(HAApp *)entry
+- (instancetype)initWithEntry:(HAApp *)entry
 {
     self = [super init];
     if ( self ) {
@@ -94,6 +94,16 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
     [self.view layoutIfNeeded];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+}
+
 - (void)share
 {
     // !!!: Sharing options (aside from Apple actions and custom actions) will only show up on a device. Only shares App Store URL for now
@@ -115,6 +125,11 @@ static NSString * const kHADetailsCellReuseIdentifier = @"cell";
 {
     [[HACoreDataManager sharedManager] deleteEntry:self.entry];
     self.navigationItem.rightBarButtonItem = self.favoriteButton;
+}
+
+- (void)orientationChanged
+{
+    [self.detailsTableView reloadData];
 }
 
 #pragma mark - UITableView datasource
